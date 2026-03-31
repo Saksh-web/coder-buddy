@@ -1,0 +1,23 @@
+{
+  "name": "coder-buddy",
+  "version": "1.0.0",
+  "description": "A task manager and performance tracker for all coders.",
+  "homepage": "https://github.com/Saksh-web/coder-buddy#readme",
+  "bugs": {
+    "url": "https://github.com/Saksh-web/coder-buddy/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Saksh-web/coder-buddy.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
