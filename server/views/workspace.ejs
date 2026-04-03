@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Workspace - Coder Buddy</title>
+  
 </head>
 <body>
 
@@ -43,7 +44,11 @@
     <p><strong>Created At:</strong> <%= project.createdAt ? new Date(project.createdAt).toDateString() : "N/A" %></p><br>
 
     <button type="submit">Save Changes</button>
+    <button type="reset">reset</button>
 
+  </form>
+  <form method="POST" action="/workspace/delete/<%= project._id %> " onsubmit="return confirm('Are you sure you want to delete this project?');">
+    <button type="submit">delete project</button>
   </form>
 
 </body>

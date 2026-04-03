@@ -3,6 +3,8 @@ const router = express.Router();
  const{
     update
 } = require("../controllers/updateProject")
+const{deleteProject} = require("../controllers/deleteProject")
+
 const auth = require("../middlewares/login")
 const Project = require("../models/project");
 
@@ -19,4 +21,5 @@ router.get("/:id",auth,async(req,res)=>{
 })
 
 router.post("/:id",auth,update);
+router.post("/delete/:id",auth,deleteProject)
 module.exports = router;
