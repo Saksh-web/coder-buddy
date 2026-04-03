@@ -1,11 +1,13 @@
 const express = require("express")
 const router = express.Router();
 const{
-    createNewUser
-} = require("../controllers/register")
+   isRegistered
+} = require("../controllers/login")
 
 router.get("/",(req,res)=>{
-    return res.render("register")
+    return res.render("login")
 })
-router.post("/",createNewUser);
+
+router.post("/",isRegistered);
+
 module.exports = router;
