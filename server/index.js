@@ -5,6 +5,8 @@ require("dotenv").config();
 const jwtSecret = process.env.JWT_SECRET;
 const userRegister = require("./routes/register");
 const userLogin = require("./routes/login")
+const addProject = require("./routes/addProject")
+const workspace = require("./routes/workspace")
 
 
 //connections
@@ -27,12 +29,27 @@ console.log("file started");
 
 
 
- const auth = require("./middlewares/login")
-app.get("/",auth,async (req, res) => {
-  await res.send("Server is running");
+const Project = require("./models/project");
+
+const auth = require("./middlewares/login");
+
+app.get("/", auth, async (req, res) => {
+  try {
+    const projects = await Project.find({ user: req.user.userId });
+
+    res.render("home", {
+      projects   
+    });
+  } catch (err) {
+    console.error(err);
+    res.send("cannot fetch your projects");
+  }
 });
 app.use("/register",userRegister)
 app.use("/login",userLogin)
+app.use("/addProject",addProject)
+app.use("/workspace",workspace)
+
 
 
 

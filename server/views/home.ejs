@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home - Coder Buddy</title>
+</head>
+<body>
+
+  <h2>Welcome,<%= user.username %></h2>
+
+  <a href="/addProject">
+  <button>+ Add Project</button>
+</a>
+
+  <h3>Your Projects:</h3>
+
+  <% if (projects && projects.length > 0) { %>
+  <ul>
+    <% projects.forEach(project => { %>
+      <li>
+        <strong><%= project.title %></strong> |
+        <%= project.category %> |
+        <%= project.difficulty %>
+        <a href="/workspace/<%= project._id %>">
+          <button>work on it</button>
+        </a>
+      </li>
+    <% }) %>
+  </ul>
+<% } else { %>
+  <p>No projects yet </p>
+<% } %>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Workspace - Coder Buddy</title>
+</head>
+<body>
+
+  <h2>Workspace</h2>
+
+  <form method="POST" action="/workspace/<%= project._id %>">
+   
+    <!-- Title -->
+    <label>Title:</label><br>
+    <input type="text" name="title" value="<%= project.title %>"><br><br>
+
+    <!-- Description -->
+    <label>Description:</label><br>
+    <textarea name="description"><%= project.description %></textarea><br><br>
+
+    <!-- Difficulty -->
+    <label>Difficulty:</label><br>
+    <select name="difficulty">
+      <option value="Easy" <%= project.difficulty === "Easy" ? "selected" : "" %>>Easy</option>
+      <option value="Medium" <%= project.difficulty === "Medium" ? "selected" : "" %>>Medium</option>
+      <option value="Hard" <%= project.difficulty === "Hard" ? "selected" : "" %>>Hard</option>
+    </select><br><br>
+
+    <!-- Tech Stack -->
+    <label>Tech Stack (comma separated):</label><br>
+    <input type="text" name="techStack" value="<%= project.techStack ? project.techStack.join(',') : '' %>"><br><br>
+
+    <!-- Category -->
+    <label>Category:</label><br>
+    <select name="category">
+      <option value="Web Dev" <%= project.category === "Web Dev" ? "selected" : "" %>>Web Dev</option>
+      <option value="DSA" <%= project.category === "DSA" ? "selected" : "" %>>DSA</option>
+      <option value="College" <%= project.category === "College" ? "selected" : "" %>>College</option>
+      <option value="Learning" <%= project.category === "Learning" ? "selected" : "" %>>Learning</option>
+    </select><br><br>
+
+   
+    <!-- Created At -->
+    <p><strong>Created At:</strong> <%= project.createdAt ? new Date(project.createdAt).toDateString() : "N/A" %></p><br>
+
+    <button type="submit">Save Changes</button>
+
+  </form>
+
+</body>
+</html>

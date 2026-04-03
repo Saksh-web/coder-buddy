@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add Project - Coder Buddy</title>
+</head>
+<body>
+
+  <h2>Add New Project</h2>
+
+  <form method="POST" action="/addProject">
+
+    <!-- Title -->
+    <label>Title:</label><br>
+    <input type="text" name="title" required><br><br>
+
+    <!-- Description -->
+    <label>Description:</label><br>
+    <textarea name="description"></textarea><br><br>
+
+    <!-- Difficulty -->
+    <label>Difficulty:</label><br>
+    <select name="difficulty">
+      <option value="Easy">Easy</option>
+      <option value="Medium">Medium</option>
+      <option value="Hard">Hard</option>
+    </select><br><br>
+
+    <!-- Tech Stack (comma separated) -->
+    <label>Tech Stack (comma separated):</label><br>
+    <input type="text" name="techStack"><br><br>
+
+    <!-- Category -->
+    <label>Category:</label><br>
+    <select name="category">
+      <option value="Web Dev">Web Dev</option>
+      <option value="DSA">DSA</option>
+      <option value="College">College</option>
+      <option value="Learning">Learning</option>
+    </select><br><br>
+<!-- 
+     Time Spent
+    <label>Time Spent (hours):</label><br>
+    <input type="number" name="timeSpent"><br><br> -->
+
+    <button type="submit">Create Project</button>
+
+  </form>
+
+</body>
+</html>
