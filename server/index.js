@@ -7,6 +7,7 @@ const userRegister = require("./routes/register");
 const userLogin = require("./routes/login")
 const addProject = require("./routes/addProject")
 const workspace = require("./routes/workspace")
+const shareTask = require("./routes/shareTask")
 
 
 //connections
@@ -49,7 +50,7 @@ app.use("/register",userRegister)
 app.use("/login",userLogin)
 app.use("/addProject",addProject)
 app.use("/workspace",workspace)
-
+app.use("/shareTask",shareTask)
 
 
 

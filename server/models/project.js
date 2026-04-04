@@ -35,6 +35,20 @@ const projectSchema = new mongoose.Schema({
   //   type: Number, // in hours
   //   default: 0
   // },
+ submitted: {
+    type: String,
+    enum: ["yes", "no"],
+    default: "no"
+  },
+  assignedBy: {
+    type: String,
+    
+    default: "selfAssigned"
+  },
+  recipientEmail: {
+    type: String,
+    
+  },
 
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -45,6 +59,10 @@ const projectSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now
+  },
+   dueDate: {
+    type: Date,
+    required:false
   }
 });
 

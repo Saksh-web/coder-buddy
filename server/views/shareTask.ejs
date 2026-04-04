@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Share Task - Coder Buddy</title>
+</head>
+<body>
+
+  <h2>Share a Task</h2>
+
+  <form method="POST" action="/shareTask">
+
+    <!-- Recipient Email -->
+    <label>Assign To (Email):</label><br>
+    <input type="email" name="email" required placeholder="Enter recipient email"><br><br>
+
+    <!-- Title -->
+    <label>Title:</label><br>
+    <input type="text" name="title" required placeholder="Task title"><br><br>
+
+    <!-- Description -->
+    <label>Description:</label><br>
+    <textarea name="description" placeholder="Task description"></textarea><br><br>
+
+    <!-- Difficulty -->
+    <label>Difficulty:</label><br>
+    <select name="difficulty">
+      <option value="Easy">Easy</option>
+      <option value="Medium">Medium</option>
+      <option value="Hard">Hard</option>
+    </select><br><br>
+
+    <!-- Tech Stack (comma separated) -->
+    <label>Tech Stack:</label><br>
+    <input type="text" name="techStack" placeholder="e.g., Node.js, MongoDB"><br><br>
+
+    <!-- Category -->
+    <label>Category:</label><br>
+    <select name="category">
+      <option value="Web Dev">Web Dev</option>
+      <option value="DSA">DSA</option>
+      <option value="College">College</option>
+      <option value="Learning">Learning</option>
+    </select><br><br>
+      <!-- Due Date -->
+    <label>Due Date:</label><br>
+    <input type="date" name="dueDate"><br><br>
+
+    <button type="submit">Share Task</button>
+
+  </form>
+
+</body>
+</html>
