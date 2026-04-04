@@ -1,17 +1,41 @@
-const express = require("express")
+const express = require("express");
 const router = express.Router();
 
 const Project = require("../models/project");
-
 const auth = require("../middlewares/login");
 
 router.get("/", auth, async (req, res) => {
   try {
-    const projects = await Project.find({ user: req.user.userId });
+    const userProjects = await Project.find({ user: req.user.userId });
+
+    // Submitted (ONLY here)
+    const submittedProjects = userProjects.filter(
+      p => p.submitted === "yes"
+    );
+
+    // Self Assigned (NOT submitted)
+    const selfAssignedProjects = userProjects.filter(
+      p => p.submitted !== "yes" && p.assignedBy === "selfAssigned"
+    );
+
+    // Received (NOT submitted)
+    const receivedProjects = userProjects.filter(
+      p => p.submitted !== "yes" && p.assignedBy !== "selfAssigned"
+    );
+
+    // Sent (NOT submitted)
+    const sentProjects = await Project.find({
+      assignedBy: req.user.email,
+      submitted: { $ne: "yes" } // 🔥 IMPORTANT
+    });
 
     res.render("home", {
-      projects   
+      submittedProjects,
+      selfAssignedProjects,
+      receivedProjects,
+      sentProjects
     });
+
   } catch (err) {
     console.error(err);
     res.send("cannot fetch your projects");

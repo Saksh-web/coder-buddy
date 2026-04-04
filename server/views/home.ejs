@@ -15,11 +15,27 @@
   <button>+ Add Project</button>
 </a>
 
-  <h3>Your Projects:</h3>
+<!--.............sorting-->
+<h3> Submitted Projects:</h3>
 
-  <% if (projects && projects.length > 0) { %>
+<% if (submittedProjects && submittedProjects.length > 0) { %>
   <ul>
-    <% projects.forEach(project => { %>
+    <% submittedProjects.forEach(project => { %>
+      <li>
+        <strong><%= project.title %></strong> |
+        <%= project.category %> |
+        <%= project.difficulty %>
+      </li>
+    <% }) %>
+  </ul>
+<% } else { %>
+  <p>No submitted projects</p>
+<% } %>
+<h3>Self Assigned:</h3>
+
+<% if (selfAssignedProjects && selfAssignedProjects.length > 0) { %>
+  <ul>
+    <% selfAssignedProjects.forEach(project => { %>
       <li>
         <strong><%= project.title %></strong> |
         <%= project.category %> |
@@ -31,14 +47,52 @@
     <% }) %>
   </ul>
 <% } else { %>
-  <p>No projects yet </p>
+  <p>No self assigned projects</p>
+<% } %>
+<h3>Received Projects:</h3>
+
+<% if (receivedProjects && receivedProjects.length > 0) { %>
+  <ul>
+    <% receivedProjects.forEach(project => { %>
+      <li>
+        <strong><%= project.title %></strong> |
+        <%= project.category %> |
+        <%= project.difficulty %> |
+        Assigned By: <%= project.assignedBy %> |
+        Due: <%= project.dueDate ? project.dueDate.toDateString() : "No due date" %>
+        
+        <a href="/workspace/<%= project._id %>">
+          <button>work on it</button>
+        </a>
+      </li>
+    <% }) %>
+  </ul>
+<% } else { %>
+  <p>No received projects</p>
+<% } %>
+<h3>Sent Projects:</h3>
+
+<% if (sentProjects && sentProjects.length > 0) { %>
+  <ul>
+    <% sentProjects.forEach(project => { %>
+      <li>
+        <strong><%= project.title %></strong> |
+        <%= project.category %> |
+        <%= project.difficulty %> |
+        Sent To: <%= project.recipientEmail %> |
+        Due: <%= project.dueDate ? project.dueDate.toDateString() : "No due date" %>
+      </li>
+    <% }) %>
+  </ul>
+<% } else { %>
+  <p>No sent projects</p>
 <% } %>
 <!-- ..................assigning task to team mates feature............................ -->
 
  <form method="GET" action="/shareTask" >
     <button type="submit">shareTask</button>
   </form>
-
+<!--  ..........................  -->
 
 </body>
 </html>
