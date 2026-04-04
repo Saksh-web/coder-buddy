@@ -13,7 +13,8 @@
   <p>Tech Stack: <%= project.techStack.join(", ") %></p>
   <p>Assigned By: <%= project.assignedBy %></p>
   <p>Due Date: <%= project.dueDate ? project.dueDate.toDateString() : "N/A" %></p>
-
+  <h3>Solution:</h3>
+<pre><%= project.solution || "No solution submitted yet." %></pre>
   <!-- Accept button -->
   <form method="POST" action="/verify/accept/<%= project._id %>">
     <button type="submit" name="action" value="accept">Accept</button>

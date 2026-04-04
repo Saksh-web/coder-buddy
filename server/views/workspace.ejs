@@ -62,12 +62,11 @@
 <pre id="terminalOutput" style="background:#1e1e1e; color:#fff; padding:10px; border-radius:5px;width: 50%; min-height:100px;"></pre>
 
 
-<!-- Save Solution Form -->
-<form method="POST" action="/workspace/saveSolution/<%= project._id %>" 
-      onsubmit="document.getElementById('solutionInput').value = editor.getValue();">
-  <input type="hidden" name="solution" id="solutionInput">
-  <button type="submit">Save Solution</button>
-</form>
+
+<!-- Save Solution Button (AJAX version) -->
+ <h3>Solution:</h3>
+<pre id="solutionDisplay"><%= project.solution || '' %></pre>
+<button id="saveBtn" type="button">Save Solution</button>
 
    
     <!-- Created At -->
@@ -126,6 +125,32 @@ document.getElementById('runBtn').addEventListener('click', async () => {
 });
 </script>
 
+<script>
+document.getElementById('saveBtn').addEventListener('click', async () => {
+    const solution = window.editor.getValue();
+    const projectId = "<%= project._id %>";
+
+    try {
+        const res = await fetch(`/workspace/saveSolution/${projectId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ solution })
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+            // Dynamically update the solution display
+            document.getElementById('solutionDisplay').innerText = solution;
+            alert('Solution saved!');
+        } else {
+            alert('Error saving solution');
+        }
+    } catch (err) {
+        alert('Error saving solution: ' + err);
+    }
+});
+</script>
 
 </body>
 </html>

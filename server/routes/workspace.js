@@ -26,17 +26,21 @@ router.get("/:id", auth, async (req, res) => {
 
 router.post("/update/:id", auth, update);
 
+
 router.post('/saveSolution/:id', auth, async (req, res) => {
   const { solution } = req.body;
   const projectId = req.params.id;
   try {
     await Project.findByIdAndUpdate(projectId, { solution });
-    res.redirect(`/workspace/${projectId}`);
+    res.json({ success: true });
   } catch (err) {
     console.error(err);
-    res.send('Error saving solution');
+    res.json({ success: false });
   }
 });
+
+
+
 const { spawn } = require("child_process");
 
 router.post("/runCode/:id", auth, async (req, res) => {

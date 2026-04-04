@@ -14,8 +14,8 @@
   <p>Assigned By: <%= project.assignedBy %></p>
   <p>Assigned To: <%= project.recipientEmail %></p>
   <p>Submitted Status: <%= project.submitted %></p>
-  <h3>Solution:</h3>
-<pre><%= project.solution %></pre>
+ <h3>Solution:</h3>
+<pre><%= project.solution || "No solution submitted yet." %></pre>
 
 <!-- Go Back Button -->
 <a href="/"><button>Go Back to Home</button></a>
