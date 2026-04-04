@@ -15,7 +15,8 @@ async function isRegistered(req, res) {
     //creating token
     const token = jwt.sign(
          {userId: USER._id ,
-            username :USER.username
+            username :USER.username,
+            email: USER.email
          },
     process.env.JWT_SECRET,
     {expiresIn:"1h"}

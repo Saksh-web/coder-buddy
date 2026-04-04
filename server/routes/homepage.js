@@ -26,7 +26,7 @@ router.get("/", auth, async (req, res) => {
     // Sent (NOT submitted)
     const sentProjects = await Project.find({
       assignedBy: req.user.email,
-      submitted: { $ne: "yes" } // 🔥 IMPORTANT
+      submitted: { $ne: "yes" } 
     });
 
     res.render("home", {
