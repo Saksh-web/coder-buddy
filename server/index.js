@@ -3,6 +3,7 @@ const app = express();
 const path = require("path");
 require("dotenv").config(); 
 const jwtSecret = process.env.JWT_SECRET;
+const homepage = require("./routes/homepage");
 const userRegister = require("./routes/register");
 const userLogin = require("./routes/login")
 const userLogout = require("./routes/logout")
@@ -31,22 +32,8 @@ console.log("file started");
 
 
 
-const Project = require("./models/project");
 
-const auth = require("./middlewares/login");
-
-app.get("/", auth, async (req, res) => {
-  try {
-    const projects = await Project.find({ user: req.user.userId });
-
-    res.render("home", {
-      projects   
-    });
-  } catch (err) {
-    console.error(err);
-    res.send("cannot fetch your projects");
-  }
-});
+app.use("/",homepage)
 app.use("/register",userRegister)
 app.use("/login",userLogin)
 app.use("/logout",userLogout)
