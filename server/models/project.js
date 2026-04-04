@@ -37,7 +37,7 @@ const projectSchema = new mongoose.Schema({
   // },
  submitted: {
     type: String,
-    enum: ["yes", "no"],
+    enum: ["yes", "no","pending"],
     default: "no"
   },
   assignedBy: {
@@ -63,6 +63,8 @@ const projectSchema = new mongoose.Schema({
    dueDate: {
     type: Date,
     required:false
+  },feedback: {
+    type:String
   }
 });
 

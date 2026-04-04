@@ -6,7 +6,23 @@ async function submitProject(req, res) {
 
     if (!id) return res.send("Project ID missing");
 
-    await Project.findOneAndUpdate(
+    const proj = await Project.findById(id);
+    if (!proj) return res.send("Project not found");
+    
+        if(proj.assignedBy !== "selfAssigned"){
+            await Project.findOneAndUpdate(
+      {
+        _id: id,
+        user: req.user.userId // ensure user owns the project
+      },
+      {
+        submitted: "pending"
+      }
+    );
+
+        }
+        else{
+             await Project.findOneAndUpdate(
       {
         _id: id,
         user: req.user.userId // ensure user owns the project
@@ -15,6 +31,8 @@ async function submitProject(req, res) {
         submitted: "yes"
       }
     );
+        }
+   
 
     return res.redirect("/");
   } catch (err) {

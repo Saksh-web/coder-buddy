@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Verify Project</title>
+</head>
+<body>
+  <h2>Verify Project</h2>
+
+  <h3>Title: <%= project.title %></h3>
+  <p>Description: <%= project.description %></p>
+  <p>Category: <%= project.category %></p>
+  <p>Difficulty: <%= project.difficulty %></p>
+  <p>Tech Stack: <%= project.techStack.join(", ") %></p>
+  <p>Assigned By: <%= project.assignedBy %></p>
+  <p>Due Date: <%= project.dueDate ? project.dueDate.toDateString() : "N/A" %></p>
+
+  <!-- Accept button -->
+  <form method="POST" action="/verify/accept/<%= project._id %>">
+    <button type="submit" name="action" value="accept">Accept</button>
+  </form>
+
+  <!-- Reject button with feedback and new due date -->
+  <form method="POST" action="/verify/reject/<%= project._id %>">
+    <label>Feedback:</label><br>
+    <textarea name="feedback" placeholder="Add feedback"></textarea><br>
+    <label>New Due Date (optional):</label><br>
+    <input type="date" name="newDueDate"><br>
+    <button type="submit" name="action" value="reject">Reject</button>
+  </form>
+</body>
+</html>

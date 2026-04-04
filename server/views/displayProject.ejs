@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project Details</title>
+</head>
+<body>
+  <h2>Project Details</h2>
+
+  <h3>Title: <%= project.title %></h3>
+  <p>Description: <%= project.description %></p>
+  <p>Category: <%= project.category %></p>
+  <p>Difficulty: <%= project.difficulty %></p>
+  <p>Tech Stack: <%= project.techStack.join(", ") %></p>
+  <p>Assigned By: <%= project.assignedBy %></p>
+  <p>Assigned To: <%= project.recipientEmail %></p>
+  <p>Submitted Status: <%= project.submitted %></p>
+  <p>Due Date: <%= project.dueDate ? project.dueDate.toDateString() : "N/A" %></p>
+  <% if(project.feedback && project.feedback !== "***") { %>
+    <p>Feedback: <%= project.feedback %></p>
+  <% } %>
+<!-- Go Back Button -->
+<a href="/"><button>Go Back to Home</button></a>
+</body>
+</html>

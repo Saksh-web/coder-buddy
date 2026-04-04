@@ -60,7 +60,11 @@
         <%= project.difficulty %> |
         Assigned By: <%= project.assignedBy %> |
         Due: <%= project.dueDate ? project.dueDate.toDateString() : "No due date" %>
-        
+        <% if (project.feedback && project.feedback.trim() !== "") { %>
+          <br>
+          <em>Feedback:(submission rejected)</em>
+        <% } %>
+        <br>
         <a href="/workspace/<%= project._id %>">
           <button>work on it</button>
         </a>
@@ -86,6 +90,46 @@
   </ul>
 <% } else { %>
   <p>No sent projects</p>
+<% } %>
+
+<!-- Pending for Verification -->
+<h3>Pending for Verification</h3>
+<% if(toVerify.length > 0) { %>
+  <ul>
+    <% toVerify.forEach(p => { %>
+      <li>
+        <strong><%= p.title %></strong> | 
+        <%= p.category %> | 
+        Assigned By: <%= p.assignedBy %>
+       
+      </li>
+    <% }) %>
+  </ul>
+<% } else { %>
+  <p>No projects pending verification</p>
+<% } %>
+<!--  Replies Section -->
+<h3>Replies</h3>
+<% if(replies.length > 0) { %>
+  <ul>
+    <% replies.forEach(p => { %>
+      <li>
+        <strong><%= p.title %></strong> | 
+        Assigned To: <%= p.recipientEmail %>
+
+       <% if (p.feedback === "***") { %>
+         <a href="/display/<%= p._id %>"><button>Verified OK</button></a>
+      </li>
+      
+         <% } else { %>
+          <a href="/verify/<%= p._id %>"><button>Verify</button></a>
+      </li>
+       <% } %>
+        
+    <% }) %>
+  </ul>
+<% } else { %>
+  <p>No replies yet</p>
 <% } %>
 <!-- ..................assigning task to team mates feature............................ -->
 

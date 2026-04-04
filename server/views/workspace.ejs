@@ -16,8 +16,19 @@
 
     <!-- Description -->
     <label>Description:</label><br>
-    <textarea name="description"><%= project.description %></textarea><br><br>
+    <textarea name="description"><%= project.description %>
+    
+    </textarea><br><br>
 
+    
+        <% if (project.feedback && project.feedback.trim() !== "") { %>
+          <br>
+          <em>Feedback: <%= project.feedback %></em>
+        <% } %>
+
+        <br>
+    
+      
     <!-- Difficulty -->
     <label>Difficulty:</label><br>
     <select name="difficulty">

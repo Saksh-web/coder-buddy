@@ -10,8 +10,8 @@ const userLogout = require("./routes/logout")
 const addProject = require("./routes/addProject")
 const workspace = require("./routes/workspace")
 const shareTask = require("./routes/shareTask")
-
-
+const verifyReply = require("./routes/verify")
+const displayProject = require("./routes/displayProject")
 //connections
 
 const connect = require("./connection");
@@ -40,7 +40,8 @@ app.use("/logout",userLogout)
 app.use("/addProject",addProject)
 app.use("/workspace",workspace)
 app.use("/shareTask",shareTask)
-
+app.use("/verify",verifyReply)
+app.use("/display",displayProject) //read only 
 
 
 app.listen(3000, () => {

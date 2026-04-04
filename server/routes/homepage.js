@@ -15,25 +15,36 @@ router.get("/", auth, async (req, res) => {
 
     // Self Assigned (NOT submitted)
     const selfAssignedProjects = userProjects.filter(
-      p => p.submitted !== "yes" && p.assignedBy === "selfAssigned"
+      p => p.submitted === "no" && p.assignedBy === "selfAssigned"
     );
 
     // Received (NOT submitted)
     const receivedProjects = userProjects.filter(
-      p => p.submitted !== "yes" && p.assignedBy !== "selfAssigned"
+      p => p.submitted === "no" && p.assignedBy !== "selfAssigned"
     );
 
     // Sent (NOT submitted)
     const sentProjects = await Project.find({
       assignedBy: req.user.email,
-      submitted: { $ne: "yes" } 
+      submitted:"no"
     });
+    //replies (sent +submitted =!no)
+    const replies = await Project.find({
+         assignedBy: req.user.email,
+      submitted: { $ne: "no" } 
+    });
+    //pending for verification (recieved + submitted = "pending")
+    const toVerify = userProjects.filter(
+      p => p.submitted === "pending" && p.assignedBy !== "selfAssigned"
+    );
 
     res.render("home", {
       submittedProjects,
       selfAssignedProjects,
       receivedProjects,
-      sentProjects
+      sentProjects,
+      toVerify,
+      replies
     });
 
   } catch (err) {
