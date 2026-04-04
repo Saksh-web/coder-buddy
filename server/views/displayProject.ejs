@@ -14,10 +14,9 @@
   <p>Assigned By: <%= project.assignedBy %></p>
   <p>Assigned To: <%= project.recipientEmail %></p>
   <p>Submitted Status: <%= project.submitted %></p>
-  <p>Due Date: <%= project.dueDate ? project.dueDate.toDateString() : "N/A" %></p>
-  <% if(project.feedback && project.feedback !== "***") { %>
-    <p>Feedback: <%= project.feedback %></p>
-  <% } %>
+  <h3>Solution:</h3>
+<pre><%= project.solution %></pre>
+
 <!-- Go Back Button -->
 <a href="/"><button>Go Back to Home</button></a>
 </body>

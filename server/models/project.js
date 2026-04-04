@@ -60,6 +60,10 @@ const projectSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
+  solution: {
+  type: String,
+  default: ""
+},
    dueDate: {
     type: Date,
     required:false
