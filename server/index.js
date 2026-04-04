@@ -5,6 +5,7 @@ require("dotenv").config();
 const jwtSecret = process.env.JWT_SECRET;
 const userRegister = require("./routes/register");
 const userLogin = require("./routes/login")
+const userLogout = require("./routes/logout")
 const addProject = require("./routes/addProject")
 const workspace = require("./routes/workspace")
 const shareTask = require("./routes/shareTask")
@@ -48,6 +49,7 @@ app.get("/", auth, async (req, res) => {
 });
 app.use("/register",userRegister)
 app.use("/login",userLogin)
+app.use("/logout",userLogout)
 app.use("/addProject",addProject)
 app.use("/workspace",workspace)
 app.use("/shareTask",shareTask)

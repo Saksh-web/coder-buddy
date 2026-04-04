@@ -7,6 +7,9 @@
 <body>
 
   <h2>Welcome,<%= user.username %></h2>
+   <form method="GET" action="/logout" onclick="return confirm('Do you want to log out?')">
+    <button type="submit">logout</button>
+  </form>
 
   <a href="/addProject">
   <button>+ Add Project</button>
