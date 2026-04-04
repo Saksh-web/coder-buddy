@@ -37,5 +37,28 @@ router.post('/saveSolution/:id', auth, async (req, res) => {
     res.send('Error saving solution');
   }
 });
+const { spawn } = require("child_process");
+
+router.post("/runCode/:id", auth, async (req, res) => {
+    const { code } = req.body;
+
+    let output = "";
+    let errorOccurred = false;
+
+    const child = spawn("node", ["-e", code]);
+
+    child.stdout.on("data", (data) => {
+        output += data.toString();
+    });
+
+    child.stderr.on("data", (data) => {
+        output += "Error: " + data.toString();
+        errorOccurred = true;
+    });
+
+    child.on("close", () => {
+        res.json({ output, error: errorOccurred });
+    });
+});
 
 module.exports = router;
