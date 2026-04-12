@@ -1,6 +1,6 @@
 const Project = require("../models/project");
 const User = require("../models/user");
-
+const logActivity = require("../utils/logActivity");
 async function shareTask(req, res) {
   try {
     const { email, title, description, difficulty, techStack, category,dueDate } = req.body;
@@ -12,7 +12,7 @@ async function shareTask(req, res) {
     }
 
 
-    await Project.create({
+    const P = await Project.create({
       title: title,
       description: description,
       difficulty: difficulty,
@@ -25,7 +25,13 @@ async function shareTask(req, res) {
       
       
     });
-
+   await logActivity({
+  userId: req.user.userId, // YOU
+  projectId: P._id,       
+  targetUserId:recipient._id,     // RECEIVER
+  type: "PROJECT_SHARED",
+   message: `shared project: ${P.title}`
+});
     return res.redirect("/");
   } catch (err) {
     console.error(err);

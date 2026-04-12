@@ -8,7 +8,7 @@ async function submitProject(req, res) {
 
     const proj = await Project.findById(id);
     if (!proj) return res.send("Project not found");
-    
+        //if proj is recieved
         if(proj.assignedBy !== "selfAssigned"){
             await Project.findOneAndUpdate(
       {
@@ -19,6 +19,13 @@ async function submitProject(req, res) {
         submitted: "pending"
       }
     );
+      await logActivity({
+  userId: req.user.userId, // YOU
+  projectId: proj._id,       
+ 
+  type: "PROJECT_SENT_FOR_REVIEW",
+   message: `project submitted for review ,title -: ${proj.title}`
+});
 
         }
         else{
@@ -31,6 +38,13 @@ async function submitProject(req, res) {
         submitted: "yes"
       }
     );
+     await logActivity({
+  userId: req.user.userId, // YOU
+  projectId: proj._id,       
+ 
+  type: "PROJECT_SUBMITTED",
+   message: `shared project: ${proj.title}`
+});
         }
    
 
