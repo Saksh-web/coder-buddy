@@ -11,7 +11,7 @@ async function deleteProject(req, res) {
       _id: id,
       user: req.user.userId 
     });
-
+   
     return res.redirect("/"); 
   } catch (err) {
     console.error(err);

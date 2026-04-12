@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const Activity = require("../models/activity");
 const Project = require("../models/project");
 const auth = require("../middlewares/login");
 
@@ -38,13 +38,21 @@ router.get("/", auth, async (req, res) => {
       p => p.submitted === "pending" && p.assignedBy !== "selfAssigned"
     );
 
+
+
+    // activities
+    const activities = await Activity.find({ userId: req.user.userId })
+  .sort({ createdAt: -1 })
+  .limit(5);
+
     res.render("home", {
       submittedProjects,
       selfAssignedProjects,
       receivedProjects,
       sentProjects,
       toVerify,
-      replies
+      replies,
+      activities
     });
 
   } catch (err) {

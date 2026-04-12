@@ -138,6 +138,12 @@
     <button type="submit">shareTask</button>
   </form>
 <!--  ..........................  -->
+  <h3>Recent Activity</h3>
 
+<ul>
+  <% activities.forEach(act => { %>
+    <li><%= act.message %></li>
+  <% }) %>
+</ul>
 </body>
 </html>
