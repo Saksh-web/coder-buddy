@@ -1,5 +1,5 @@
 const Project = require("../models/project");
-
+const logActivity = require("../utils/logActivity");
 async function submitProject(req, res) {
   try {
     const id = req.params.id;
@@ -43,7 +43,7 @@ async function submitProject(req, res) {
   projectId: proj._id,       
  
   type: "PROJECT_SUBMITTED",
-   message: `shared project: ${proj.title}`
+   message: `submitted project: ${proj.title}`
 });
         }
    

@@ -30,7 +30,8 @@ const activitySchema = new mongoose.Schema({
       "PROJECT_SUBMITTED",
       "PROJECT_DELETED",
       "PROJECT_ACCEPTED",
-      "PROJECT_RJECTED",
+      "PROJECT_REJECTED",
+       "PROJECT_REVIEWED",
       "PROJECT_SENT_FOR_REVIEW"
     ],
     index: true

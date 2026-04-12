@@ -1,5 +1,5 @@
 const Project = require("../models/project");
-
+const logActivity = require("../utils/logActivity");
 async function update(req, res) {
   try {
     const id = req.params.id;
@@ -18,7 +18,12 @@ async function update(req, res) {
       },
       { new: true }
     );
-
+         await logActivity({
+  userId:req.user.userId,
+  projectId: req.params.id,
+  type: "PROJECT_SAVED",
+  message: `saved project: ${title}`
+}); 
     if (!updatedProject) {
       return res.send("Project not found or not yours");
     }
