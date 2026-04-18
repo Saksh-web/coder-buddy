@@ -8,10 +8,17 @@
   <h2>Share a Task</h2>
 
   <form method="POST" action="/shareTask">
+    
+  <!-- Fake Toggle (UI only) -->
+<label>
+  <input type="checkbox">
+  Make Public
+</label>
 
+<br><br>
     <!-- Recipient Email -->
     <label>Assign To (Email):</label><br>
-    <input type="email" name="email" required placeholder="Enter recipient email"><br><br>
+    <input type="email" name="email" placeholder="leave empty if public"><br><br>
 
     <!-- Title -->
     <label>Title:</label><br>

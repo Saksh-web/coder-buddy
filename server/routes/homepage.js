@@ -20,8 +20,7 @@ router.get("/", auth, async (req, res) => {
 
     // Received (NOT submitted)
     const receivedProjects = userProjects.filter(
-      p => p.submitted === "no" && p.assignedBy !== "selfAssigned"
-    );
+      p => p.submitted === "no" && p.assignedBy !== "selfAssigned" )
 
     // Sent (NOT submitted)
     const sentProjects = await Project.find({
@@ -37,6 +36,11 @@ router.get("/", auth, async (req, res) => {
     const toVerify = userProjects.filter(
       p => p.submitted === "pending" && p.assignedBy !== "selfAssigned"
     );
+    //public projects
+     const publicShared = await Project.find({
+      recipientEmail: "public",
+      submitted:"no"
+    });
 
 
 
@@ -52,7 +56,8 @@ router.get("/", auth, async (req, res) => {
       sentProjects,
       toVerify,
       replies,
-      activities
+      activities,
+      publicShared
     });
 
   } catch (err) {

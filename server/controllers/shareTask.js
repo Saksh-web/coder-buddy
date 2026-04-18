@@ -4,14 +4,37 @@ const logActivity = require("../utils/logActivity");
 async function shareTask(req, res) {
   try {
     const { email, title, description, difficulty, techStack, category,dueDate } = req.body;
+   if(!email) {
+    //user wants a public post by default
+ 
+    const P = await Project.create({
+      title: title,
+      description: description,
+      difficulty: difficulty,
+      techStack: techStack ? techStack.split(",").map(t => t.trim()) : [],
+      category: category,
+                
+      assignedBy: req.user.email, 
+      
+      dueDate
+      
+      
+    });
+   await logActivity({
+  userId: req.user.userId, // YOU
+  projectId: P._id,       
+  
+  type: "PROJECT_SHARED",
+   message: `shared a public project: ${P.title} `
+});
+   }
+   else{
 
     // Find recipient
     const recipient = await User.findOne({ email });
     if (!recipient) {
       return res.send("Recipient not found");
     }
-
-
     const P = await Project.create({
       title: title,
       description: description,
@@ -32,6 +55,8 @@ async function shareTask(req, res) {
   type: "PROJECT_SHARED",
    message: `shared project: ${P.title}`
 });
+   }
+
     return res.redirect("/");
   } catch (err) {
     console.error(err);

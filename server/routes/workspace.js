@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router();
 
 const { update } = require("../controllers/updateProject")
+const { recieve } = require("../controllers/recieveProject")
 const { deleteProject } = require("../controllers/deleteProject")
 const { submitProject } = require("../controllers/submitProject")
 
@@ -25,6 +26,7 @@ router.get("/:id", auth, async (req, res) => {
 })
 
 router.post("/update/:id", auth, update);
+router.post("/recieve/update/:id", auth, recieve);
 
 
 router.post('/saveSolution/:id', auth, async (req, res) => {
@@ -38,6 +40,7 @@ router.post('/saveSolution/:id', auth, async (req, res) => {
     res.json({ success: false });
   }
 });
+
 
 
 

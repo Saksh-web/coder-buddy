@@ -31,10 +31,7 @@ const projectSchema = new mongoose.Schema({
     default: "Web Dev"
   },
 
-  // timeSpent: {
-  //   type: Number, // in hours
-  //   default: 0
-  // },
+ 
  submitted: {
     type: String,
     enum: ["yes", "no","pending"],
@@ -47,13 +44,13 @@ const projectSchema = new mongoose.Schema({
   },
   recipientEmail: {
     type: String,
-    
+    default:"public",
   },
 
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-    required: true
+    
   },
 
   createdAt: {

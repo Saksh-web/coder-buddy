@@ -145,5 +145,20 @@
     <li><%= act.message %></li>
   <% }) %>
 </ul>
+
+<h3>Public tasks</h3>
+
+<ul>
+  <% publicShared.forEach(proj => { %>
+   
+        <li><%= proj.title %>
+        assigned by:<%= proj.assignedBy %>
+        <form action="/workspace/recieve/update/<%= proj._id %>" method="POST">
+  <button type="submit">Receive it</button>
+</form>
+    </li>
+  <% }) %>
+</ul>
+
 </body>
 </html>
