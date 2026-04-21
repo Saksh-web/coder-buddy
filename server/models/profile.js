@@ -8,6 +8,28 @@ const profileSchema = new mongoose.Schema(
       required: true,
       unique: true // one profile per user
     },
+    contactLinks: {
+  email: {
+    type: String,
+    trim: true
+  },
+  phone: {
+    type: String,
+    trim: true
+  },
+  linkedin: {
+    type: String,
+    trim: true
+  },
+  github: {
+    type: String,
+    trim: true
+  },
+  portfolio: {
+    type: String,
+    trim: true
+  }
+},
 
     
     bio: {

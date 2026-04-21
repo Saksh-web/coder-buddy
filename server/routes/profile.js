@@ -1,19 +1,21 @@
-const express = require("express")
+const express = require("express");
 const router = express.Router();
 
 const Profile = require("../models/profile");
-const auth = require("../middlewares/login")
+const auth = require("../middlewares/login");
 
+// GET PROFILE
 router.get("/", auth, async (req, res) => {
   try {
     let profile = await Profile.findOne({ user: req.user.userId });
 
-    // if profile doesn't exist, send empty object
+    // fallback if no profile
     if (!profile) {
       profile = {
         bio: "",
         skills: [],
-        starsCount: 0
+        starsCount: 0,
+        contactLinks: {}
       };
     }
 
@@ -24,12 +26,22 @@ router.get("/", auth, async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+
+
+// UPDATE PROFILE
 router.post("/update", auth, async (req, res) => {
-    console.log("USER:", req.user);
   try {
-    const { bio, skills } = req.body;
+    const {
+      bio,
+      skills,
+      email,
+      phone,
+      linkedin,
+      github,
+      portfolio
+    } = req.body;
 
-
+    // 🔥 skills → array
     let skillsArray = [];
     if (skills) {
       skillsArray = skills
@@ -38,28 +50,31 @@ router.post("/update", auth, async (req, res) => {
         .filter(s => s.length > 0);
     }
 
-    // see if profile exists
     let profile = await Profile.findOne({ user: req.user.userId });
 
+    const updateData = {
+      bio: bio || "",
+      skills: skillsArray,
+      contactLinks: {
+        email: email || "",
+        phone: phone || "",
+        linkedin: linkedin || "",
+        github: github || "",
+        portfolio: portfolio || ""
+      }
+    };
+
     if (!profile) {
-      // if not ,Create new profile
       profile = new Profile({
         user: req.user.userId,
-        bio: bio || "",
-        skills: skillsArray
+        ...updateData
       });
-
-      await profile.save();
-
     } else {
-      
-      profile.bio = bio || "";
-      profile.skills = skillsArray;
-
-      await profile.save();
+      Object.assign(profile, updateData);
     }
 
-    //Redirect back 
+    await profile.save();
+
     res.redirect("/profile");
 
   } catch (err) {
