@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile</title>
+
+</head>
+<body>
+
+<div class="container">
+  <h2>Your Profile</h2>
+
+  <form action="/profile/update" method="POST">
+
+    <!-- BIO -->
+    <label>Bio</label>
+
+    <div class="display">
+      <%= profile.bio && profile.bio.trim() !== "" ? profile.bio : "None" %>
+    </div>
+
+    <textarea name="bio" placeholder="Update your bio..."><%= profile.bio || "" %></textarea>
+
+ <br/>
+    <!-- SKILLS -->
+    <label>Skills (comma separated)</label>
+
+    <div class="display">
+      <% if (profile.skills && profile.skills.length > 0) { %>
+       
+      <% } else { %>
+        None
+      <% } %>
+    </div>
+
+    <input 
+      type="text" 
+      name="skills" 
+      placeholder="e.g. react,node,mongodb"
+      value="<%= profile.skills ? profile.skills.join(',') : '' %>"
+    />
+
+
+<br/>
+    <!-- STARS (read only) -->
+    <label>Stars</label>
+    <div class="display">
+      <%= profile.starsCount || 0 %>
+    </div>
+
+    <!-- SAVE BUTTON -->
+    <button type="submit">Save Changes</button>
+    
+  </form>
+
+<!-- Go Back Button -->
+<a href="/"><button>Go Back to Home</button></a>
+</div>
+
+</body>
+</html>

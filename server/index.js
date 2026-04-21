@@ -12,6 +12,7 @@ const workspace = require("./routes/workspace")
 const shareTask = require("./routes/shareTask")
 const verifyReply = require("./routes/verify")
 const displayProject = require("./routes/displayProject")
+const profile = require("./routes/profile")
 //connections
 
 const connect = require("./connection");
@@ -42,6 +43,7 @@ app.use("/workspace",workspace)
 app.use("/shareTask",shareTask)
 app.use("/verify",verifyReply)
 app.use("/display",displayProject) //read only 
+app.use("/profile",profile)
 
 
 app.listen(3000, () => {

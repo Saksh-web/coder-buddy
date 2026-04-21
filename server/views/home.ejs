@@ -7,6 +7,10 @@
 <body>
 
   <h2>Welcome,<%= user.username %></h2>
+  <form method="GET" action="/profile" >
+    <button type="submit">profile🧑‍🦱</button>
+  </form>
+
    <form method="GET" action="/logout" onclick="return confirm('Do you want to log out?')">
     <button type="submit">logout</button>
   </form>
